@@ -20,8 +20,8 @@ const latestPosts = posts.sort((a, b) => {
 
 <DefaultLayout>
   <HeaderSection />
-  <HeroSection />
-  <FeaturesCardsSection />
+  <HeroSection client:load />
+  <FeaturesCardsSection client:load />
   <FeaturesGrid />
   <LatestPosts latestPosts={latestPosts}/>
   <TestimonialsSection />
