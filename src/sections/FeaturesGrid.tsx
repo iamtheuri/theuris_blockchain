@@ -1,5 +1,7 @@
+import { useRef } from "react";
 import { CutCornerButton } from "../components/CutCornerButton";
 import { TextButton } from "../components/TextButton";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const listItems = [
   "Experience unparalleled security and scalability",
@@ -8,6 +10,87 @@ const listItems = [
 ];
 
 export const FeaturesGrid = () => {
+
+  // SECTION 1 ANIMATIONS
+  const torusKnotRef = useRef(null);
+  const firstHemisphereRef = useRef(null);
+
+  // Torus Animation
+  const { scrollYProgress: torusKnotScrollYProgress } = useScroll({
+    target: torusKnotRef,
+    offset: ["start end", "end start"]
+  });
+
+  const torusKnotTranslateY = useTransform(
+    torusKnotScrollYProgress,
+    [0, 1], //Screen View Port
+    [100, -100] //Move up from 100 to -100 (Translate)
+  );
+
+  const torusKnotRotate = useTransform(
+    torusKnotScrollYProgress,
+    [0, 1], //Screen View Port
+    [30, -30] //Rotate from 30 to -30 (Translate)
+  );
+
+  // First Hemisphere Animation
+  const { scrollYProgress: firstHemisphereScrollYProgress } = useScroll({
+    target: firstHemisphereRef,
+    offset: ["start end", "end start"]
+  });
+
+  const firstHemisphereTranslateY = useTransform(
+    firstHemisphereScrollYProgress,
+    [0, 1],
+    [50, -50]
+  );
+
+  const firstHemisphereRotate = useTransform(
+    firstHemisphereScrollYProgress,
+    [0, 1],
+    [-20, -50]
+  );
+
+  // SECTION 2 ANIMATIONS
+  const coneRef = useRef(null);
+  const secondHemisphereRef = useRef(null);
+
+  // Torus Animation
+  const { scrollYProgress: coneScrollYProgress } = useScroll({
+    target: coneRef,
+    offset: ["start end", "end start"]
+  });
+
+  const coneTranslateY = useTransform(
+    coneScrollYProgress,
+    [0, 1],
+    [100, -100]
+  );
+
+  const coneRotate = useTransform(
+    coneScrollYProgress,
+    [0, 1],
+    [12, 45]
+  );
+
+  // Second Hemisphere Animation
+  const { scrollYProgress: secondHemisphereScrollYProgress } = useScroll({
+    target: secondHemisphereRef,
+    offset: ["start end", "end start"]
+  });
+
+  const secondHemisphereTranslateY = useTransform(
+    secondHemisphereScrollYProgress,
+    [0, 1],
+    [50, -50]
+  );
+
+  const secondHemisphereRotate = useTransform(
+    secondHemisphereScrollYProgress,
+    [0, 1],
+    [-20, -50]
+  );
+
   return (
     <section className="py-24 overflow-x-clip">
       <div className="container">
@@ -36,15 +119,25 @@ export const FeaturesGrid = () => {
             </div>
             <div className="hidden md:block">
               <div className="relative inline-flex z-0">
-                <img
+                <motion.img
                   src="/assets/images/torus-knot.png"
                   alt="Torus Knot 3D image"
                   className="size-96 max-w-none"
+                  ref={torusKnotRef}
+                  style={{
+                    translateY: torusKnotTranslateY,
+                    rotate: torusKnotRotate
+                  }}
                 />
-                <img
+                <motion.img
                   src="/assets/images/hemisphere.png"
                   alt="Hemisphere 3D shape"
                   className="absolute size-96 top-3/4 -z-10 scale-x-[-1]"
+                  ref={firstHemisphereRef}
+                  style={{
+                    translateY: firstHemisphereTranslateY,
+                    rotate: firstHemisphereRotate
+                  }}
                 />
               </div>
             </div>
@@ -52,15 +145,25 @@ export const FeaturesGrid = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="relative hidden md:block">
               <div className="absolute right-0 z-0">
-                <img
+                <motion.img
                   src="/assets/images/cone.png"
                   alt="Cone 3D shape"
-                  className="size-96 max-w-none rotate-12"
+                  className="size-96 max-w-none"
+                  ref={coneRef}
+                  style={{
+                    translateY: coneTranslateY,
+                    rotate: coneRotate
+                  }}
                 />
-                <img
+                <motion.img
                   src="/assets/images/hemisphere.png"
                   alt="Hemisphere 3D shape"
-                  className="absolute top-3/4 -z-10"
+                  className="absolute top-3/4 -z-10 left-0"
+                  ref={secondHemisphereRef}
+                  style={{
+                    translateY: secondHemisphereTranslateY,
+                    rotate: secondHemisphereRotate
+                  }}
                 />
               </div>
             </div>
