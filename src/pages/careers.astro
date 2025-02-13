@@ -1,0 +1,30 @@
+---
+import InteriorHero from "../components/InteriorHero.astro";
+import InteriorContent from "../components/InteriorContent.astro";
+import { Tag } from "../components/Tag";
+import DefaultLayout from "../layouts/Default.astro";
+import { type CollectionEntry, getCollection } from "astro:content";
+import { getPostColorFromCategory } from "../utils/postUtils";
+---
+
+<DefaultLayout>
+  <!-- Hero Secion -->
+  <InteriorHero>
+    <div class="relative">
+      <h1
+        class="font-heading font-black text-5xl md:text-6xl lg:text-7xl text-center mt-4 max-w-4xl mx-auto"
+      >
+        Oops! No jobs available at the moment
+      </h1>
+      <p class="text-center text-xl mt-8 text-zinc-400 max-w-2xl mx-auto">
+        Keep on checking with us to not miss out on opportunities
+      </p>
+    </div>
+  </InteriorHero>
+  <InteriorContent>
+    <div
+      class="prose prose-invert mx-auto prose-zinc prose-headings:font-heading prose-headings:font-black prose-h2:text-3xl prose-h2:md:text-4xl prose-h2:lg:text-5xl prose-h3:text-2xl prose-h3:md:text-3xl prose-h3:lg:text-4xl"
+    >
+    </div>
+  </InteriorContent>
+</DefaultLayout>

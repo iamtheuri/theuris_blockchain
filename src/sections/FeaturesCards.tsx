@@ -41,7 +41,7 @@ export const FeaturesCardsSection = () => {
       setSelectedCardIndex((curr) =>
         curr === cardData.length - 1 ? 0 : curr + 1
       );
-    }, 3000);
+    }, 4500);
     return () => {
       clearTimeout(timeout);
     };
@@ -55,6 +55,7 @@ export const FeaturesCardsSection = () => {
           <div className="flex flex-none gap-8">
             {cardData.map(({ image, title, description, color }) => (
               <div
+                key={title}
                 className="inline-flex transition-all duration-500"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
